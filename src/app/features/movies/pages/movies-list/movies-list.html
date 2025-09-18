@@ -1,0 +1,18 @@
+<section class="container">
+  <h1>🎬 Películas Populares</h1>
+
+  <mat-form-field appearance="outline" class="search">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ej: Inception" />
+  </mat-form-field>
+
+  <app-shared-table
+    [displayedColumns]="displayedColumns"
+    [data]="data"
+    [totalResults]="totalResults"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [loading]="loading"
+    (pageChange)="onPageChange($event)">
+  </app-shared-table>
+</section>

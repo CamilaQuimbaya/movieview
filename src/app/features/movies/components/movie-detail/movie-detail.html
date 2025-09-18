@@ -1,0 +1,12 @@
+<div class="movie-detail">
+  <img *ngIf="data.poster_path"
+       [src]="'https://image.tmdb.org/t/p/w500' + data.poster_path"
+       alt="{{ data.title }}" />
+
+  <div class="info">
+    <h2>{{ data.title }}</h2>
+    <p><strong>Estreno:</strong> {{ data.release_date }}</p>
+    <p><strong>Rating:</strong> ⭐ {{ data.vote_average }}</p>
+    <p *ngIf="data.overview"><strong>Sinopsis:</strong> {{ data.overview }}</p>
+  </div>
+</div>
