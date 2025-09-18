@@ -5,6 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 
 import { MovieService } from '../../data/movie.service.ts';
 import { Movie } from '../../data/movie.model';
@@ -20,6 +22,7 @@ import { MovieDetailComponent } from '../../components/movie-detail/movie-detail
     MatInputModule,
     MatTableModule,
     MatDialogModule,
+    ReactiveFormsModule,   // 👈 importante
     SharedTableComponent
   ],
   templateUrl: './movies-list.html',
@@ -39,8 +42,33 @@ export class MoviesListComponent implements OnInit {
   loading = false;
   lastQuery = '';
 
+  searchControl = new FormControl(''); // 👈 nuevo
+
   ngOnInit() {
     this.loadMovies();
+
+    // 👇 optimización: debounce y cancelación
+    this.searchControl.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      tap(query => {
+        this.pageIndex = 0;
+        this.loading = true;
+      }),
+      switchMap(query => this.svc.getPopular(1, query ?? ''))
+    ).subscribe({
+      next: res => {
+        this.data = res.results;
+        this.totalResults = res.total_results;
+        this.loading = false;
+        this.cdr.markForCheck();
+      },
+      error: err => {
+        console.error('Error TMDB:', err);
+        this.loading = false;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   loadMovies(page: number = 1, query?: string) {
@@ -65,12 +93,6 @@ export class MoviesListComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.loadMovies(this.pageIndex + 1);
-  }
-
-  applyFilter(event: Event) {
-    const value = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.pageIndex = 0;
-    this.loadMovies(1, value || undefined);
   }
 
   openDetail(movie: Movie) {

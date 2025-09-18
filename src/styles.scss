@@ -32,8 +32,16 @@ body {
 
   // Reset the user agent margin.
   margin: 0;
+  
 }
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;font-family: 'Poppins', sans-serif;  background: #121212;   // fondo oscuro
+  color: #EAEAEA;}
+
+h1, h2 {
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: #ff4784; // título en fucsia
+}

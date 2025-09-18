@@ -2,12 +2,15 @@
   display: flex;
   gap: 1rem;
   padding: 1rem;
-  max-width: 600px;
+  background: #1e1e1e;
+  border: 1px solid #e91e63; // borde fucsia
+  border-radius: 12px;
+  color: #EAEAEA;
 
   img {
     border-radius: 10px;
     max-width: 200px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.4);
   }
 
   .info {
@@ -17,14 +20,12 @@
     gap: 0.5rem;
 
     h2 {
-      margin: 0;
-      font-size: 1.5rem;
-      color: #1976d2;
+      color: #e91e63;
     }
 
     p {
       margin: 0;
-      line-height: 1.4;
+      line-height: 1.5;
     }
   }
 }
