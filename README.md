@@ -1,60 +1,144 @@
-# PruebaFrontend
+# 🎬 MovieView – Angular + Material
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.0.
+Aplicación frontend desarrollada en **Angular 17** con **Angular Material**, que consume la API pública de [The Movie Database (TMDB)](https://www.themoviedb.org/).  
+Permite explorar películas populares, buscar por título y visualizar detalles en un modal, todo con un **diseño oscuro personalizado, tipografía Poppins y acentos fucsia**.
 
-## Development server
+👉 **Demo online:** [https://movieview-one.vercel.app/](https://movieview-one.vercel.app/)
 
-To start a local development server, run:
+---
+
+## ✨ Características principales
+
+- **Consumo de API en tiempo real** usando `HttpClient`.
+- **Listado de películas** en tabla paginada con Angular Material.
+- **Filtro de búsqueda** optimizado con debounce y cancelación de peticiones (RxJS).
+- **Detalle de película** en un modal (poster, fecha, rating y sinopsis).
+- **Arquitectura modular y escalable**: separación en `features/`, `shared/` y `core/`.
+- **UI custom**: dark theme, bordes fucsia, tipografía Poppins.
+- **Testing unitario** con Jasmine + Karma (`MovieService`, `MoviesListComponent`, `MovieDetailComponent`, `SharedTableComponent`).
+- **Deploy automatizado en Vercel**, con configuración para producción.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- [Angular 17](https://angular.dev/)
+- [Angular Material](https://material.angular.io/)
+- [RxJS](https://rxjs.dev/)
+- [Jasmine & Karma](https://jasmine.github.io/) para tests unitarios
+- [Vercel](https://vercel.com/) para deploy en producción
+
+---
+
+## ⚙️ Instalación y ejecución local
+
+Clonar el proyecto:
 
 ```bash
-ng serve
+git clone https://github.com/tu-usuario/prueba-frontend.git
+cd prueba-frontend
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Ejecutar en modo desarrollo:
 
 ```bash
-ng generate component component-name
+ng serve -o
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+La aplicación quedará disponible en [http://localhost:4200](http://localhost:4200).
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## 🧪 Testing
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Para ejecutar los tests unitarios:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+Esto corre Karma + Jasmine y muestra resultados en consola/navegador.
 
-For end-to-end (e2e) testing, run:
+---
+
+## 🏗️ Build de producción
 
 ```bash
-ng e2e
+ng build --configuration production
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Los archivos optimizados quedarán en `dist/prueba-frontend/`.  
+Estos son los que se despliegan en producción (ej: Vercel, Netlify, GitHub Pages).
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# movieview
+## 🌍 Deploy en Vercel
+
+La aplicación está publicada en:  
+👉 [https://movieview-one.vercel.app/](https://movieview-one.vercel.app/)
+
+Pasos clave para el deploy:
+1. Conexión del repo GitHub a Vercel.
+2. Configuración de build:
+   - **Build Command:** `ng build --configuration production`
+   - **Output dir:** `dist/prueba-frontend`
+3. Uso del **API Read Access Token** de TMDB en los environments de producción.
+
+---
+
+## 🔑 Environments
+
+Los archivos de configuración (`environment.ts`) no se suben al repo por buenas prácticas.  
+Para correr localmente debes crear `src/environments/environment.ts` con:
+
+```ts
+export const environment = {
+  production: false,
+  apiUrl: 'https://api.themoviedb.org/3',
+  apiKey: 'YOUR_API_KEY_HERE'
+};
+```
+
+⚠️ Se recomienda usar el **API Read Access Token de TMDB**, que es de solo lectura y seguro para aplicaciones frontend.
+
+---
+
+## 📂 Estructura del proyecto
+
+```
+src/app/
+│
+├── core/                # Servicios globales e interceptores
+├── features/
+│   └── movies/          # Feature principal (listado + detalle de películas)
+│       ├── components/  # Componentes específicos (modal de detalle)
+│       ├── data/        # Servicios y modelos de TMDB
+│       └── pages/       # Páginas (MoviesList)
+├── shared/              # Componentes reutilizables (tabla, etc.)
+└── environments/        # Configuración por entorno
+```
+
+---
+
+## 👩‍💻 Autora
+
+**Laura Camila Quimbaya**  
+Frontend / Fullstack Developer 🚀  
+
+Me apasiona construir interfaces escalables, limpias y con foco en la experiencia de usuario.  
+Este proyecto refleja buenas prácticas de arquitectura en Angular, integración con APIs reales, testing y despliegue en la nube.
+
+---
+
+## 📌 Notas finales
+
+- Este proyecto fue desarrollado como prueba técnica con enfoque **senior**:  
+  - Arquitectura modular.  
+  - Standalone Components.  
+  - ChangeDetectionStrategy.OnPush.  
+  - RxJS para optimizar requests.  
+  - Unit testing.  
+  - Deploy en producción.  
+
+- El resultado es una app lista para evolucionar (ej. más filtros, autenticación, favoritos, etc.).
