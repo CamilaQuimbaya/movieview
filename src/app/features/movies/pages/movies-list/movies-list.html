@@ -1,12 +1,21 @@
 <section class="container">
   <div class="page-header">
-    <h1>🎬 Películas Populares</h1>
+  <h1>Películas Populares</h1>
 
-    <mat-form-field appearance="outline" class="search-input">
-      <mat-label>Buscar</mat-label>
-      <input matInput [formControl]="searchControl" placeholder="Ej: Inception" />
-    </mat-form-field>
-  </div>
+  <mat-form-field appearance="outline" class="search-input">
+    <mat-label>Buscar</mat-label>
+    <mat-icon matPrefix>search</mat-icon> <!-- 👈 icono antes del input -->
+    <input matInput [formControl]="searchControl" placeholder="Ej: Inception" />
+    <button *ngIf="searchControl.value"
+            mat-icon-button
+            matSuffix
+            aria-label="Clear"
+            (click)="searchControl.setValue('')">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
 
   <app-shared-table
     [displayedColumns]="displayedColumns"

@@ -3,26 +3,61 @@ table {
   border-radius: 8px;
   overflow: hidden;
   background: #1e1e1e;
-  color: #EAEAEA;
   font-size: 0.95rem;
 }
 
-th {
-  background: #e91e63; // encabezado fucsia
-  color: white;
-  font-weight: 500;
+/* Encabezados */
+th,
+.mat-mdc-header-cell {
+  background: #e91e63 !important; // fucsia
+  color: #ffffff !important;
+  font-weight: 600;
   text-transform: uppercase;
+  font-size: 0.85rem;
 }
 
-td {
-  background: #2a2a2a;
+/* Celdas normales */
+td,
+.mat-mdc-cell {
+  background: #2a2a2a !important;
+  color: #EAEAEA !important; 
   border-bottom: 1px solid #333;
 }
 
+/* Filas clickeables */
 tr.clickable-row {
   cursor: pointer;
   transition: background 0.2s ease;
 }
 tr.clickable-row:hover {
   background: rgba(233, 30, 99, 0.15); // fucsia translúcido
+}
+
+.mat-mdc-paginator {
+  background: #1e1e1e;          // mismo fondo que la tabla
+  color: #EAEAEA;               // texto claro
+  border-top: 1px solid #333;   // separador sutil
+
+  .mat-mdc-icon-button {
+    color: #EAEAEA;             // flechas en gris claro
+  }
+
+  .mat-mdc-paginator-range-label {
+    color: #aaa;                // texto del rango en gris suave
+  }
+
+  .mat-mdc-select-value,
+  .mat-mdc-select-arrow {
+    color: #EAEAEA;             // número por página y flecha select
+  }
+
+  .mat-mdc-select-panel {
+    background: #2a2a2a;        // menú desplegable oscuro
+    color: #EAEAEA;
+  }
+
+  .mat-mdc-option.mdc-list-item--selected {
+    background: rgba(233, 30, 99, 0.2); // selección con fucsia translúcido
+    color: #fff;
+  }
 }

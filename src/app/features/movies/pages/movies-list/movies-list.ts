@@ -7,6 +7,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { MatIconModule } from '@angular/material/icon';
+
 
 import { MovieService } from '../../data/movie.service.ts';
 import { Movie } from '../../data/movie.model';
@@ -22,6 +24,7 @@ import { MovieDetailComponent } from '../../components/movie-detail/movie-detail
     MatInputModule,
     MatTableModule,
     MatDialogModule,
+    MatIconModule,
     ReactiveFormsModule,   // 👈 importante
     SharedTableComponent
   ],

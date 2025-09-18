@@ -33,3 +33,20 @@
     }
   }
 }
+
+
+.search-input {
+  width: 300px;
+
+  .mat-mdc-form-field-outline {
+    stroke: #e91e63 !important;
+  }
+
+  .mat-icon {
+    color: #e91e63; // fucsia para el ícono
+  }
+
+  input {
+    color: #EAEAEA;
+  }
+}
