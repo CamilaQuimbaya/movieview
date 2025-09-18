@@ -4,10 +4,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { MovieService } from '../../data/movie.service.ts';
 import { Movie } from '../../data/movie.model';
 import { SharedTableComponent } from '../../../../shared/components/table/shared-table/shared-table';
+import { MovieDetailComponent } from '../../components/movie-detail/movie-detail.js';
 
 @Component({
   selector: 'app-movies-list',
@@ -16,7 +18,8 @@ import { SharedTableComponent } from '../../../../shared/components/table/shared
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule,          // 👈 Necesario aquí también
+    MatTableModule,
+    MatDialogModule,
     SharedTableComponent
   ],
   templateUrl: './movies-list.html',
@@ -26,6 +29,7 @@ import { SharedTableComponent } from '../../../../shared/components/table/shared
 export class MoviesListComponent implements OnInit {
   private svc = inject(MovieService);
   private cdr = inject(ChangeDetectorRef);
+  private dialog = inject(MatDialog);
 
   displayedColumns = ['poster', 'title', 'release_date', 'vote_average'];
   data: Movie[] = [];
@@ -44,11 +48,10 @@ export class MoviesListComponent implements OnInit {
     this.lastQuery = query ?? this.lastQuery;
     this.svc.getPopular(page, this.lastQuery).subscribe({
       next: (res) => {
-        console.log('Respuesta de TMDB:', res);
         this.data = res.results;
         this.totalResults = res.total_results;
         this.loading = false;
-        this.cdr.markForCheck(); // 🔥 fuerza update con OnPush
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('Error TMDB:', err);
@@ -68,5 +71,12 @@ export class MoviesListComponent implements OnInit {
     const value = (event.target as HTMLInputElement).value.trim().toLowerCase();
     this.pageIndex = 0;
     this.loadMovies(1, value || undefined);
+  }
+
+  openDetail(movie: Movie) {
+    this.dialog.open(MovieDetailComponent, {
+      width: '600px',
+      data: movie
+    });
   }
 }

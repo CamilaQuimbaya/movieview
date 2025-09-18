@@ -21,6 +21,11 @@ export class SharedTableComponent<T extends { id: number | string }> {
   @Input() loading = false;
 
   @Output() pageChange = new EventEmitter<PageEvent>();
+  @Output() rowClick = new EventEmitter<T>();   // 👈 nuevo evento
+
+  onRowClick(row: T) {
+    this.rowClick.emit(row);
+  }
 
   trackById = (_: number, item: T) => item.id;
 }

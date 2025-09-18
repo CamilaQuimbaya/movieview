@@ -13,6 +13,7 @@
     [pageSize]="pageSize"
     [pageIndex]="pageIndex"
     [loading]="loading"
-    (pageChange)="onPageChange($event)">
+    (pageChange)="onPageChange($event)"
+    (rowClick)="openDetail($event)"> <!-- 👈 detalle -->
   </app-shared-table>
 </section>
